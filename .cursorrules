@@ -1,0 +1,205 @@
+# Development Task: Embeddable Widget with Container Deployment
+
+## Context & Background
+You are developing an embeddable widget that will be:
+1. Hosted on a container platform (e.g., Render)
+2. Embedded into third-party websites via script tags
+3. Developed locally with hot-reloading
+4. Deployed via GitHub integration
+
+## Technical Requirements
+
+### Environment Setup
+- Node.js >=16.0.0
+- Express.js for server
+- Nodemon for development
+- GitHub repository for deployment
+- Render.com for hosting
+
+### Development Architecture
+1. Server-side:
+   - Express server handling API requests
+   - Static file serving
+   - CORS enabled for cross-origin embedding
+   - Environment-aware configuration
+
+2. Client-side:
+   - Self-contained widget code
+   - No global namespace pollution
+   - Automatic environment detection
+   - Progressive enhancement
+
+## Example Implementation Structure
+
+1. **Package Configuration**:
+json
+{
+"name": "your-widget-name",
+"version": "1.0.0",
+"scripts": {
+"start": "node server.js",
+"dev": "nodemon server.js"
+},
+"engines": {
+"node": ">=16.0.0"
+}
+}
+
+
+2. **Server Setup**:
+javascript
+const express = require('express');
+const app = express();
+const PORT = process.env.PORT || 3000;
+// CORS for embedding
+app.use((req, res, next) => {
+res.header('Access-Control-Allow-Origin', '');
+next();
+});
+// Static files
+app.use(express.static('public'));
+app.listen(PORT, () => console.log(Server running on port ${PORT}));
+
+
+3. **Widget Code**:
+javascript
+(function() {
+// Environment detection
+const SERVER_URL = window.location.hostname === 'localhost'
+? 'http://localhost:3000'
+: 'https://your-render-app.onrender.com';
+// Widget initialization
+function init() {
+// Create container
+const container = document.getElementById('widget-container');
+if (!container) return;
+// Inject styles
+injectStyles();
+// Initialize functionality
+setupWidget();
+}
+// Start initialization
+init();
+})();
+
+
+## Development Workflow
+
+1. **Local Development**:
+   ```html
+   <!-- Test page -->
+   <div id="widget-container"></div>
+   <script src="http://localhost:3000/widget.js"></script>
+   ```
+   Run: `npm run dev`
+
+2. **Production Deployment**:
+   ```html
+   <!-- Production embed -->
+   <div id="widget-container"></div>
+   <script src="https://your-render-app.onrender.com/widget.js"></script>
+   ```
+   Deploy: Push to GitHub, Render auto-deploys
+
+## Best Practices
+
+1. **Embed-First Design**:
+   - Self-contained functionality
+   - No external dependencies in embed code
+   - Minimal host page requirements
+   - Graceful error handling
+
+2. **Container-Ready Architecture**:
+   - Environment variables for configuration
+   - Proper port handling
+   - Static file optimization
+   - Caching strategies
+
+3. **Development Experience**:
+   - Hot reloading with nodemon
+   - Clear error messages
+   - Easy local testing
+   - Simple deployment process
+
+## Chain of Thought Development Process
+
+1. **Initial Setup**:
+   - Create GitHub repository
+   - Initialize Node.js project
+   - Set up Express server
+   - Configure nodemon
+
+2. **Core Development**:
+   - Implement server endpoints
+   - Create widget container
+   - Add widget functionality
+   - Implement styling
+
+3. **Environment Handling**:
+   - Add environment detection
+   - Configure server URLs
+   - Set up CORS
+   - Handle static files
+
+4. **Testing & Deployment**:
+   - Test locally with nodemon
+   - Create test pages
+   - Push to GitHub
+   - Deploy to Render
+
+## Expected Deliverables
+
+1. **Repository Structure**:
+/
+├── public/
+│ ├── widget.js
+│ └── styles.css
+├── server.js
+├── package.json
+└── README.md
+
+2. **Documentation**:
+   - Setup instructions
+   - Development guide
+   - Embedding instructions
+   - API documentation
+
+3. **Testing Materials**:
+   - Local test page
+   - Example implementations
+   - Error scenarios
+   - Performance tests
+
+## Success Criteria
+
+1. Widget loads successfully in both development and production
+2. Hot reloading works with `npm run dev`
+3. Automatic deployment works via GitHub
+4. Widget functions in cross-origin environments
+5. Clean error handling and fallbacks
+6. Minimal impact on host page
+7. Clear documentation for implementation
+
+## Error Prevention
+
+1. **Common Issues**:
+   - CORS configuration
+   - Port conflicts
+   - Environment detection
+   - Script loading failures
+
+2. **Solutions**:
+   - Proper error handling
+   - Clear error messages
+   - Fallback strategies
+   - Documentation of known issues
+
+## Development Tips
+
+1. Use the browser console for debugging
+2. Test cross-origin functionality
+3. Verify hot reloading behavior
+4. Check deployment pipeline
+5. Monitor render logs
+6. Test in multiple browsers
+7. Validate embed code
