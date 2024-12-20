@@ -4,7 +4,19 @@
 // Last Modified: 2023-12-20
 
 (function() {
-    // Wait for DOM to be ready
+    // More robust ready state check for Drupal
+    const whenReady = (callback) => {
+        if (document.readyState !== 'loading') {
+            // Handle case where script loads after DOM is ready
+            setTimeout(callback, 0);
+        } else {
+            // Handle case where script loads before DOM is ready
+            document.addEventListener('DOMContentLoaded', callback);
+        }
+        // Backup timeout in case DOMContentLoaded doesn't fire
+        setTimeout(callback, 2000);
+    };
+
     const init = () => {
         // Project data structure
         const projectsData = {
@@ -310,12 +322,15 @@
             }
         `;
 
-        // Create style element
-        const styleSheet = document.createElement("style");
-        styleSheet.textContent = styles;
-        document.head.appendChild(styleSheet);
+        // Ensure styles are injected only once
+        if (!document.querySelector('style[data-embed="projects"]')) {
+            const styleSheet = document.createElement("style");
+            styleSheet.setAttribute('data-embed', 'projects');
+            styleSheet.textContent = styles;
+            document.head.appendChild(styleSheet);
+        }
 
-        // Add publications popup script
+        // Add publications popup script if not already present
         if (!document.querySelector('script[src*="publications-embed.onrender.com"]')) {
             const popupScript = document.createElement("script");
             popupScript.src = "https://publications-embed.onrender.com/popup-embed.js";
@@ -500,22 +515,48 @@
             container.appendChild(fieldDiv);
         });
 
-        // Find or create target element
+        // Find or create target element with more specific targeting
         let targetElement = document.getElementById('projects-embed');
         if (!targetElement) {
-            targetElement = document.createElement('div');
-            targetElement.id = 'projects-embed';
-            document.body.appendChild(targetElement);
+            // Try to find a suitable container in Drupal context
+            targetElement = document.querySelector('.field--name-body') || 
+                          document.querySelector('main') ||
+                          document.querySelector('.main-content');
+            
+            if (targetElement) {
+                // Create and insert our embed container
+                const embedDiv = document.createElement('div');
+                embedDiv.id = 'projects-embed';
+                targetElement.appendChild(embedDiv);
+                targetElement = embedDiv;
+            } else {
+                // Fallback to body if no suitable container found
+                targetElement = document.createElement('div');
+                targetElement.id = 'projects-embed';
+                document.body.appendChild(targetElement);
+            }
         }
 
+        // Clear existing content if any
+        targetElement.innerHTML = '';
+        
         // Inject the container
         targetElement.appendChild(container);
+
+        // Log success for debugging
+        console.log('Projects embed initialized successfully');
     };
 
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
+    // Initialize with better error handling
+    try {
+        whenReady(() => {
+            try {
+                init();
+            } catch (e) {
+                console.error('Error initializing projects embed:', e);
+            }
+        });
+    } catch (e) {
+        console.error('Error in projects embed setup:', e);
     }
 })(); 
