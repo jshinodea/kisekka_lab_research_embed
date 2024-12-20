@@ -15,7 +15,7 @@ A beautiful and interactive projects page embed that can be easily integrated in
 To use this embed in your website, simply add the following script tag:
 
 ```html
-<script src="https://your-render-service.onrender.com/embed.js"></script>
+<script src="https://kisekka-lab-research-embed.onrender.com/embed.js"></script>
 ```
 
 The embed will automatically create a container with the ID `projects-embed`. If you want to place it in a specific location, you can create a div with this ID:
