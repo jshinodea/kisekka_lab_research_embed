@@ -72,16 +72,22 @@
                 font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
                 max-width: 1200px;
                 margin: 0 auto;
-                padding: 1rem;
+                padding: 0 1rem;
                 color: #003366;
                 background: #ffffff;
+                line-height: 0;
             }
 
             .research-field {
-                margin-bottom: 2.5rem;
+                margin-bottom: 2rem;
                 display: flex;
                 flex-direction: column;
                 position: relative;
+                line-height: normal;
+            }
+
+            .research-field:first-child {
+                margin-top: 0;
             }
 
             .research-field-header {
@@ -93,6 +99,8 @@
                 border-bottom: 3px solid #003366;
                 margin-bottom: 2rem;
                 width: 100%;
+                margin-top: 0;
+                padding-top: 0;
             }
 
             .collapse-icon {
@@ -104,7 +112,7 @@
                 transition: transform 0.3s ease;
                 width: 16px;
                 height: 16px;
-                top: 63%;
+                top: 43%;
                 transform: translateY(-50%);
             }
 
@@ -132,11 +140,13 @@
                 font-weight: 700;
                 letter-spacing: -0.02em;
                 padding-bottom: 0.5rem;
+                margin: 0;
                 border-bottom: 3px solid #FDB515;
                 position: relative;
                 transition: color 0.3s ease;
                 margin-bottom: -3px;
                 display: inline-block;
+                line-height: 1.2;
             }
 
             .research-field-subtitle {
