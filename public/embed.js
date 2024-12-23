@@ -165,26 +165,41 @@
                 display: block;
             }
 
-            /* Column assignments for Irrigation */
-            .research-field[data-field="Irrigation"] .research-focus-wrapper[data-column="1"] {
+            /* Default 3-column layout */
+            .research-field[data-field] .research-focus-wrapper[data-column="1"] {
                 grid-column: 1;
             }
-            .research-field[data-field="Irrigation"] .research-focus-wrapper[data-column="2"] {
+            .research-field[data-field] .research-focus-wrapper[data-column="2"] {
                 grid-column: 2;
             }
-            .research-field[data-field="Irrigation"] .research-focus-wrapper[data-column="3"] {
+            .research-field[data-field] .research-focus-wrapper[data-column="3"] {
                 grid-column: 3;
             }
 
-            /* Column assignments for Hydrology */
-            .research-field[data-field="Hydrology"] .research-focus-wrapper[data-column="1"] {
-                grid-column: 1;
+            /* 2-column layout for medium screens */
+            @media (max-width: 1024px) {
+                .research-focuses-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .research-field[data-field] .research-focus-wrapper[data-column="1"] {
+                    grid-column: 1;
+                }
+                .research-field[data-field] .research-focus-wrapper[data-column="2"],
+                .research-field[data-field] .research-focus-wrapper[data-column="3"] {
+                    grid-column: 2;
+                }
             }
-            .research-field[data-field="Hydrology"] .research-focus-wrapper[data-column="2"] {
-                grid-column: 2;
-            }
-            .research-field[data-field="Hydrology"] .research-focus-wrapper[data-column="3"] {
-                grid-column: 3;
+
+            /* 1-column layout for small screens */
+            @media (max-width: 768px) {
+                .research-focuses-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .research-field[data-field] .research-focus-wrapper[data-column] {
+                    grid-column: 1;
+                }
             }
 
             .research-focus {
@@ -403,8 +418,9 @@
             };
 
             // Modify the optimizeCardPlacement function to handle different fields
-            const getColumnOrder = (field) => {
-                const columnOrders = {
+            const getColumnOrder = (field, screenWidth = window.innerWidth) => {
+                // Base column orders
+                const baseColumnOrders = {
                     "Irrigation": {
                         "Sensing and modeling": 1,
                         "Recycled water reuse for irrigation": 1,
@@ -421,7 +437,25 @@
                         "Reducing GHG emissions and sequestering carbon": 2
                     }
                 };
-                return columnOrders[field] || {};
+
+                // Adjust column assignments based on screen width
+                const columnOrder = { ...baseColumnOrders[field] };
+                
+                if (screenWidth <= 768) {
+                    // Single column - all items in column 1
+                    Object.keys(columnOrder).forEach(key => {
+                        columnOrder[key] = 1;
+                    });
+                } else if (screenWidth <= 1024) {
+                    // Two columns - redistribute items
+                    Object.keys(columnOrder).forEach(key => {
+                        if (columnOrder[key] > 2) {
+                            columnOrder[key] = 2;
+                        }
+                    });
+                }
+
+                return columnOrder || {};
             };
 
             const optimizeCardPlacement = (focuses, field) => {
@@ -533,6 +567,25 @@
 
         // Inject the container
         targetElement.appendChild(container);
+
+        // Add resize handler to update layout
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const grids = document.querySelectorAll('.research-focuses-grid');
+                grids.forEach(grid => {
+                    const field = grid.closest('.research-field').getAttribute('data-field');
+                    const focuses = projectsData[field];
+                    const optimizedFocuses = optimizeCardPlacement(focuses, field);
+                    
+                    // Update column assignments
+                    grid.querySelectorAll('.research-focus-wrapper').forEach((wrapper, index) => {
+                        wrapper.setAttribute('data-column', optimizedFocuses[index].column);
+                    });
+                });
+            }, 250); // Debounce resize events
+        });
     };
 
     // Initialize when DOM is ready
