@@ -11,54 +11,58 @@
             "Irrigation": {
                 "Sensing and modeling": [
                     { 
-                        title: "Soil moisture sensing using cosmic ray and RF based sensors",
-                        grant: "Sony Cooperation",
+                        title: "Soil moisture sensing and modeling using cosmic ray, NMR, RF, TDR, capacitance, and remote sensing",
+                        grant: "Sony Cooperation, USDA NIFA",
                         keywords: "soil moisture"
                     },
                     { 
-                        title: "Stem water potential sensing using osmometers and microtensiometers",
+                        title: "Plant water status sensing and modeling",
                         grant: "Almond Board",
                         keywords: "stem water potential"
                     },
                     { 
-                        title: "Salinity stress sensing using VOCs",
-                        grant: "Sandia National Lab",
-                        keywords: "salinity"
+                        title: "Irrigation modeling",
+                        grant: "Sandia National Lab, USDA NIFA, NRCS",
+                        keywords: "modeling"
                     },
                     { 
                         title: "Soil nitrate sensing",
-                        grant: "CDFA SCBG",
+                        grant: "CDFA SCBG, USDA NRCS, AIFS",
                         keywords: "nitrate"
                     }
                 ],
-                "Limited irrigation management for specialty crops": [
-                    { title: "Almonds", grant: "Almond Board", keywords: "almonds" },
-                    { title: "Pistachios", grant: null, keywords: "pistachios" },
-                    { title: "Processing tomatoes", grant: "US-Israel BARD", keywords: "tomatoes" }
+                "Water-limited irrigation management for specialty crops": [
+                    { title: "Almonds", grant: "Almond Board", keywords: "almond" },
+                    { title: "Pistachios", grant: "CDFA SCBG", keywords: "pistachio" },
+                    { title: "Processing tomatoes", grant: "US-Israel BARD, USDA NIFA, NRCS", keywords: "tomato" }
                 ],
-                "Limited irrigation management for field crops": [
-                    { title: "Alfalfa", grant: "USDA NIFA", keywords: "alfalfa" }
-                ],
-                "Recycled water reuse for irrigation": [
-                    { title: "Impact of recycled water reuse for irrigation on soil sodicity, salinity, and crop production", grant: "Water Research Foundation", keywords: "recycled water" }
+                "Water-limited irrigation management for field crops": [
+                    { title: "Alfalfa", grant: "USDA NIFA", keywords: "alfalfa" },
+                    { title: "Corn / Maize", grant: "USDA ARS Ogallala OAP, KCM", keywords: "corn, maize" },
+                    { title: "Sorghum", grant: "USDA ARS Ogallala OAP, KGSC", keywords: "sorghum" }
                 ]
             },
             "Hydrology": {
                 "Groundwater Sustainability": [
-                    { title: "Groundwater demand reduction through land-water allocation optimization", grant: "USDA NIFA", keywords: "allocation" },
-                    { title: "Groundwater supply increase through early spring flood irrigation followed by microirrigation", grant: "USDA NIFA", keywords: "micro-irrigation" }
+                    { title: "Groundwater Demand Management", grant: "USDA NIFA", keywords: "optimizing land and water allocation" },
+                    { title: "Conservation practices for mitigating groundwater nitrate contamination", grant: "USDA NRCS CEAP, CDFA FREP", keywords: "nitrate leach" }
                 ],
                 "Soil Hydrology": [
-                    { title: "Vadose zone monitoring and modeling of nitrate leaching to groundwater", grant: "USDA NRCS CEAP, AIFS", keywords: "vadose" },
-                    { title: "Water and carbon cycling in pistachio orchards with and without cover crops", grant: "USDA ARS", keywords: "pistachio" }
+                    { title: "Vadose zone monitoring and modeling of nitrate leaching to groundwater", grant: "USDA NRCS CEAP, AIFS, CDFA FREP", keywords: "vadose" },
+                    { title: "Soil salinity management", grant: "USDA NIFA, ARS", keywords: "salin" }
+                    
                 ],
                 "Evapotranspiration measurement and modeling": [
-                    { title: "Validation of remote sensing of ET of applied water (ETAW) for monitoring groundwater allocation under SGMA", grant: "USDA NIFA", keywords: "remote sensing" }
+                    { title: "Remote sensing of ET, ground-based measurement of ET, and agrohydrologic modeling of ET towards optimized water use in Ag", grant: "USDA NIFA, CDFA SCBG", keywords: "remote sensing, evapotranspiration" }
                 ]
             },
             "Climate Smart Agriculture": {
-                "Water management for climate-smart agriculture": [],
-                "Reducing GHG emissions and sequestering carbon": []
+                "Water management impacts on soil health": [
+                    { title: "Impact of recycled water reuse for irrigation on soil sodicity, salinity, and crop production", grant: "Water Research Foundation, USDA NIFA, ARS", keywords: "recycled water" }
+                ],
+                "Reducing GHG emissions and sequestering carbon": [
+                    { title: "Water and carbon cycling in pistachio orchards with and without cover crops", grant: "USDA NIFA, ARS", keywords: "pistachio" }
+                ]
             }
         };
 
@@ -154,13 +158,33 @@
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 gap: 1.25rem;
-                transition: all 0.3s ease;
-                margin-top: 1rem;
-                grid-auto-flow: row;
+                grid-auto-flow: dense;
             }
 
             .research-focus-wrapper {
                 display: block;
+            }
+
+            /* Column assignments for Irrigation */
+            .research-field[data-field="Irrigation"] .research-focus-wrapper[data-column="1"] {
+                grid-column: 1;
+            }
+            .research-field[data-field="Irrigation"] .research-focus-wrapper[data-column="2"] {
+                grid-column: 2;
+            }
+            .research-field[data-field="Irrigation"] .research-focus-wrapper[data-column="3"] {
+                grid-column: 3;
+            }
+
+            /* Column assignments for Hydrology */
+            .research-field[data-field="Hydrology"] .research-focus-wrapper[data-column="1"] {
+                grid-column: 1;
+            }
+            .research-field[data-field="Hydrology"] .research-focus-wrapper[data-column="2"] {
+                grid-column: 2;
+            }
+            .research-field[data-field="Hydrology"] .research-focus-wrapper[data-column="3"] {
+                grid-column: 3;
             }
 
             .research-focus {
@@ -317,7 +341,7 @@
 
         // Add publications popup script
         if (!document.querySelector('script[src*="publications-embed.onrender.com"]')) {
-            const popupScript = document.createElement("script");
+            const popupScript = document.createElement("script");   
             popupScript.src = "https://publications-embed.onrender.com/popup-embed.js";
             document.head.appendChild(popupScript);
         }
@@ -330,6 +354,7 @@
         Object.entries(projectsData).forEach(([field, focuses]) => {
             const fieldDiv = document.createElement("div");
             fieldDiv.className = "research-field";
+            fieldDiv.setAttribute("data-field", field);  // Add field identifier
             
             // Create header with collapse functionality
             const fieldHeader = document.createElement("div");
@@ -377,62 +402,60 @@
                 return cards.reduce((sum, card) => sum + card.height, 0);
             };
 
-            // Optimize card placement for minimum height
-            const optimizeCardPlacement = (focuses) => {
-                const focusEntries = Object.entries(focuses);
-                if (focusEntries.length <= 3) return focusEntries;
-
-                // Calculate heights for each card
-                const cards = focusEntries.map(([focus, projects]) => ({
-                    focus,
-                    projects,
-                    height: estimateCardHeight(projects)
-                }));
-
-                // Sort cards by height in descending order
-                cards.sort((a, b) => b.height - a.height);
-
-                // Initialize columns
-                const columns = [[], [], []];
-                let columnHeights = [0, 0, 0];
-
-                // Place each card in the column that results in the minimum max height
-                cards.forEach(card => {
-                    let bestColumn = 0;
-                    let minMaxHeight = Infinity;
-
-                    // Try placing the card in each column
-                    for (let i = 0; i < 3; i++) {
-                        const newHeight = columnHeights[i] + card.height;
-                        const potentialHeights = [...columnHeights];
-                        potentialHeights[i] = newHeight;
-                        const maxHeight = Math.max(...potentialHeights);
-
-                        if (maxHeight < minMaxHeight) {
-                            minMaxHeight = maxHeight;
-                            bestColumn = i;
-                        }
+            // Modify the optimizeCardPlacement function to handle different fields
+            const getColumnOrder = (field) => {
+                const columnOrders = {
+                    "Irrigation": {
+                        "Sensing and modeling": 1,
+                        "Recycled water reuse for irrigation": 1,
+                        "Water-limited irrigation management for specialty crops": 2,
+                        "Water-limited irrigation management for field crops": 3
+                    },
+                    "Hydrology": {
+                        "Groundwater Sustainability": 1,
+                        "Soil Hydrology": 2,
+                        "Evapotranspiration measurement and modeling": 3
+                    },
+                    "Climate Smart Agriculture": {
+                        "Water management for climate-smart agriculture": 1,
+                        "Reducing GHG emissions and sequestering carbon": 2
                     }
+                };
+                return columnOrders[field] || {};
+            };
 
-                    // Place the card in the best column
-                    columns[bestColumn].push(card);
-                    columnHeights[bestColumn] += card.height;
+            const optimizeCardPlacement = (focuses, field) => {
+                const focusEntries = Object.entries(focuses);
+                const columnOrder = getColumnOrder(field);
+                
+                // Sort entries based on column order
+                focusEntries.sort((a, b) => {
+                    const aCol = columnOrder[a[0]] ?? 999;
+                    const bCol = columnOrder[b[0]] ?? 999;
+                    if (aCol === bCol) {
+                        return focusEntries.indexOf(a) - focusEntries.indexOf(b);
+                    }
+                    return aCol - bCol;
                 });
 
-                // Convert back to focus entries format
-                return columns.flat().map(card => [card.focus, card.projects]);
+                return focusEntries.map(entry => ({
+                    focus: entry[0],
+                    projects: entry[1],
+                    column: columnOrder[entry[0]] || 1
+                }));
             };
 
             // Get optimized card arrangement
-            const optimizedFocuses = optimizeCardPlacement(focuses);
+            const optimizedFocuses = optimizeCardPlacement(focuses, field);
             
             // Create a document fragment to hold all cards
             const fragment = document.createDocumentFragment();
             
             // Create and append cards in optimized order
-            optimizedFocuses.forEach(([focus, projects]) => {
+            optimizedFocuses.forEach(({ focus, projects, column }) => {
                 const wrapperDiv = document.createElement("div");
                 wrapperDiv.className = "research-focus-wrapper";
+                wrapperDiv.setAttribute("data-column", column);
 
                 const focusDiv = document.createElement("div");
                 focusDiv.className = "research-focus";
