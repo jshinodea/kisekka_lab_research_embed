@@ -49,7 +49,7 @@
                 ],
                 "Soil Hydrology": [
                     { title: "Vadose zone monitoring and modeling of nitrate leaching to groundwater", grant: "USDA NRCS CEAP, AIFS, CDFA FREP", keywords: "vadose" },
-                    { title: "Salinity management", grant: "USDA NIFA, ARS", keywords: "Assessing the State of Knowledge, salin" }
+                    { title: "Salinity management", grant: "USDA NIFA, ARS", keywords: "Assessing the State of Knowledge, Assessing the impact of recycled water reuse on infiltration and soil structure, salin" }
                     
                 ],
                 "Evapotranspiration measurement and modeling": [
