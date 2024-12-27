@@ -70,16 +70,16 @@
         const styles = `
             .projects-container {
                 font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-                max-width: 1200px;
+                max-width: 1320px;
                 margin: 0 auto;
-                padding: 0 1rem;
+                padding: 0 1.1rem;
                 color: #003366;
                 background: #ffffff;
                 line-height: 0;
             }
 
             .research-field {
-                margin-bottom: 2rem;
+                margin-bottom: 2.2rem;
                 display: flex;
                 flex-direction: column;
                 position: relative;
@@ -96,8 +96,8 @@
                 cursor: pointer;
                 user-select: none;
                 position: relative;
-                border-bottom: 3px solid #003366;
-                margin-bottom: 2rem;
+                border-bottom: 3.3px solid #003366;
+                margin-bottom: 2.2rem;
                 width: 100%;
                 margin-top: 0;
                 padding-top: 0;
@@ -105,13 +105,13 @@
 
             .collapse-icon {
                 position: absolute;
-                left: -24px;
+                left: -26.4px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 transition: transform 0.3s ease;
-                width: 16px;
-                height: 16px;
+                width: 17.6px;
+                height: 17.6px;
                 top: 43%;
                 transform: translateY(-50%);
             }
@@ -119,9 +119,9 @@
             .collapse-icon::before {
                 content: '';
                 border: solid #003366;
-                border-width: 0 2px 2px 0;
+                border-width: 0 2.2px 2.2px 0;
                 display: inline-block;
-                padding: 3px;
+                padding: 3.3px;
                 transform: rotate(45deg);
                 transition: transform 0.3s ease;
             }
@@ -136,38 +136,40 @@
 
             .research-field-title {
                 color: #003366;
-                font-size: 1.5rem;
+                font-size: 1.65rem;
                 font-weight: 700;
                 letter-spacing: -0.02em;
-                padding-bottom: 0.5rem;
+                padding-bottom: 0.55rem;
                 margin: 0;
-                border-bottom: 3px solid #FDB515;
+                border-bottom: 3.3px solid #FDB515;
                 position: relative;
                 transition: color 0.3s ease;
-                margin-bottom: -3px;
+                margin-bottom: -3.3px;
                 display: inline-block;
-                line-height: 1.2;
+                line-height: 1.32;
+                z-index: 1;
+                background: #ffffff;
             }
 
             .research-field-subtitle {
                 color: #666;
-                font-size: 0.875rem;
+                font-size: 0.96rem;
                 text-transform: uppercase;
                 letter-spacing: 0.05em;
                 font-weight: 500;
                 background: white;
                 position: absolute;
-                bottom: -10px;
+                bottom: -11px;
                 transform: translateY(80%);
-                padding: 0 8px;
-                margin-left: -8px;
+                padding: 0 8.8px;
+                margin-left: -8.8px;
                 z-index: 1;
             }
 
             .research-focuses-grid {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
-                gap: 1.25rem;
+                gap: 1.375rem;
                 grid-auto-flow: dense;
             }
 
@@ -214,9 +216,9 @@
 
             .research-focus {
                 background: #ffffff;
-                border-radius: 8px;
+                border-radius: 8.8px;
                 border: 1px solid rgba(0, 51, 102, 0.1);
-                box-shadow: 0 2px 4px rgba(0, 51, 102, 0.05);
+                box-shadow: 0 2.2px 4.4px rgba(0, 51, 102, 0.05);
                 overflow: hidden;
                 display: flex;
                 flex-direction: column;
@@ -227,11 +229,11 @@
                 display: flex;
                 align-items: stretch;
                 background: #003366;
-                margin: 0.75rem 0;
+                margin: 0.825rem 0;
             }
 
             .research-focus-accent {
-                width: 4px;
+                width: 4.4px;
                 background: #FDB515;
                 border-radius: 0;
                 margin: 0;
@@ -239,21 +241,21 @@
 
             .research-focus-title {
                 color: white;
-                font-size: 1.125rem;
+                font-size: 1.24rem;
                 font-weight: 600;
                 margin: 0;
                 line-height: 1.3;
-                padding: 1.25rem;
+                padding: 1.375rem;
                 flex-grow: 1;
             }
 
             .projects-section {
-                padding: 0 1.25rem;
+                padding: 0 1.375rem;
                 position: relative;
                 display: flex;
-                gap: 1.25rem;
+                gap: 1.375rem;
                 flex: 1;
-                margin-bottom: 0.75rem;
+                margin-bottom: 0.825rem;
                 min-height: 0;
             }
 
@@ -262,15 +264,15 @@
                 transform: rotate(180deg);
                 text-transform: uppercase;
                 color: #003366;
-                font-size: 0.75rem;
+                font-size: 0.825rem;
                 font-weight: 600;
                 letter-spacing: 0.1em;
-                padding: 0.75rem 0;
+                padding: 0.825rem 0;
                 display: flex;
                 align-items: center;
                 position: relative;
                 opacity: 0.7;
-                margin-top: -0.5rem;
+                margin-top: -0.55rem;
             }
 
             .projects-title::before {
@@ -278,8 +280,8 @@
                 position: absolute;
                 top: 0;
                 bottom: 0;
-                left: -0.75rem;
-                width: 2px;
+                left: -0.825rem;
+                width: 2.2px;
                 background: #FDB515;
                 opacity: 0.5;
             }
@@ -287,15 +289,15 @@
             .projects-list {
                 display: flex;
                 flex-direction: column;
-                gap: 0.625rem;
+                gap: 0.69rem;
                 flex-grow: 1;
                 min-height: 0;
             }
 
             .project-item {
-                padding: 0.875rem 1rem;
+                padding: 0.96rem 1.1rem;
                 background: #f8f9fa;
-                border-radius: 6px;
+                border-radius: 6.6px;
                 border: 1px solid rgba(0, 51, 102, 0.08);
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 cursor: pointer;
@@ -306,27 +308,27 @@
             }
 
             .project-item:hover {
-                transform: translateX(4px);
+                transform: translateX(4.4px);
                 background: white;
                 border-color: #FDB515;
-                box-shadow: 0 2px 4px rgba(0, 51, 102, 0.08);
+                box-shadow: 0 2.2px 4.4px rgba(0, 51, 102, 0.08);
             }
 
             .project-title {
-                font-size: 0.875rem;
+                font-size: 0.96rem;
                 font-weight: 500;
                 color: #003366;
                 line-height: 1.4;
-                margin-bottom: 0.25rem;
+                margin-bottom: 0.275rem;
             }
 
             .project-grant {
-                font-size: 0.75rem;
+                font-size: 0.825rem;
                 color: #666;
                 font-style: italic;
-                padding: 0.25rem 0.5rem;
+                padding: 0.275rem 0.55rem;
                 background: rgba(0, 51, 102, 0.05);
-                border-radius: 4px;
+                border-radius: 4.4px;
                 display: inline-block;
             }
 
@@ -342,7 +344,7 @@
                 }
 
                 .research-field-title {
-                    font-size: 1.25rem;
+                    font-size: 1.375rem;
                 }
 
                 .research-focuses-grid {
